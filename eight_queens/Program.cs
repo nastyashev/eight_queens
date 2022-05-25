@@ -10,6 +10,8 @@ namespace eight_queens
     {
         static void Main(string[] args)
         {
+
+
         }
     }
 }
