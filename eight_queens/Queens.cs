@@ -8,14 +8,44 @@ namespace eight_queens
 {
     class Queens
     {
-        private readonly int numQueens = 8;
+        private readonly int _numQueens = 8;
+        private int[,] board = new int[8, 8];
 
-        //print solution
-        public void PrintBoard(int[,] board)
+        public bool IsSafe(int row, int col)
         {
-            for (int i = 0; i < numQueens; i++)
+            int i, j;
+
+            for (i = 0; i < col; i++)
             {
-                for (int j = 0; j < numQueens; j++)
+                if (board[row, i] == 1) 
+                    return false;
+            }
+
+            for (i = row, j = col; i >= 0 && j >= 0; i--, j--)
+            {
+                if (board[i, j] == 1)
+                    return false;
+            }
+
+            for (i = row, j = col; j >= 0 && i < _numQueens; i++, j--)
+            {
+                if (board[i, j] == 1)
+                    return false;
+            }
+
+            return true;
+        }
+
+
+
+        
+        
+        //print solution
+        public void PrintBoard()
+        {
+            for (int i = 0; i < _numQueens; i++)
+            {
+                for (int j = 0; j < _numQueens; j++)
                 {
                     Console.WriteLine(" " + board[i, j] + " ");
                 }
