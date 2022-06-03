@@ -8,9 +8,32 @@ namespace eight_queens
 {
     class Queens
     {
-        private readonly int _numQueens = 8;
-        private int[,] board = new int[8, 8];
+        private readonly int _numQueens = 8; // кількість ферзів
+        private int[,] board = new int[8, 8]; // шахова дошка
+        public int VertexNum { get; set; } // номер вершини
 
+        // конструктор
+        public Queens(int[,] board, int vertexNum)
+        {
+            this.board = board;
+            VertexNum = vertexNum;
+        }
+
+
+
+        // заповнення дошки нулями
+        public void FillBoard()
+        {
+            for (int i = 0; i < board.GetLength(0); i++)
+            {
+                for (int j = 0; j < board.GetLength(1); j++)
+                {
+                    board[i, j] = 0;
+                }
+            }
+        }
+        
+        // перевіряє чи атакований ферзь
         public bool IsSafe(int row, int col)
         {
             int i, j;
@@ -40,12 +63,12 @@ namespace eight_queens
 
         
         
-        //print solution
+        // вивід дошки
         public void PrintBoard()
         {
-            for (int i = 0; i < _numQueens; i++)
+            for (int i = 0; i < board.GetLength(0); i++)
             {
-                for (int j = 0; j < _numQueens; j++)
+                for (int j = 0; j < board.GetLength(1); j++)
                 {
                     Console.WriteLine(" " + board[i, j] + " ");
                 }

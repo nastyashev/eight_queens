@@ -9,9 +9,27 @@ namespace eight_queens
     public static class Algorithms
     {
         public class Graph
+        {           
+            private List<int>[] adj;
+            public int VerticesNum { get; set; }
+
+            public Graph(int vertNum)
+            {
+                VerticesNum = vertNum;
+                adj = new List<int>[vertNum];
+                for (int i = 0; i < vertNum; i++)
+                    adj[i] = new List<int>();
+            }
+
+            public void AddEdge(int vert, int newVert)
+            {
+                adj[vert].Add(newVert);
+            }
+        }
+
+        private static void LDFSUtil()
         {
-            public LinkedList<int>[] adj;
-            public int Size { get; set; }
+
         }
 
         public static void LDFS()
@@ -20,14 +38,8 @@ namespace eight_queens
         }
         
         
-        public static void BFS(Graph graph, int start)
+        public static void BFS()
         {
-            bool[] visited = new bool[graph.Size];
-            for (int i = 0; i < graph.Size; i++)
-            {
-                visited[i] = false;
-            }
-
             
 
 
