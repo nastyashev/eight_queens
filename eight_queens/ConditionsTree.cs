@@ -8,6 +8,21 @@ namespace eight_queens
 {
     internal class ConditionsTree
     {
+        // список станів дошки
+        public List<Queens> Conditions { get; }
+        
+        // конструктор
+        public ConditionsTree()
+        {
+            Conditions = new List<Queens>();
+        }
+
+        // додавання нового стану
+        public void AddCondition(int vertexNum)
+        {
+
+        }
+
 
     }
 }

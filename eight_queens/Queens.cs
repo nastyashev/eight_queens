@@ -9,26 +9,29 @@ namespace eight_queens
     class Queens
     {
         private readonly int _numQueens = 8; // кількість ферзів
-        private int[,] board = new int[8, 8]; // шахова дошка
+        private int[,] _board = new int[8, 8]; // шахова дошка
         public int VertexNum { get; set; } // номер вершини
 
         // конструктор
         public Queens(int[,] board, int vertexNum)
         {
-            this.board = board;
+            this._board = board;
             VertexNum = vertexNum;
         }
 
+        public int GetNumQueens() { return _numQueens; }
+
+        public int[,] GetBoard() { return _board; }
 
 
         // заповнення дошки нулями
         public void FillBoard()
         {
-            for (int i = 0; i < board.GetLength(0); i++)
+            for (int i = 0; i < _board.GetLength(0); i++)
             {
-                for (int j = 0; j < board.GetLength(1); j++)
+                for (int j = 0; j < _board.GetLength(1); j++)
                 {
-                    board[i, j] = 0;
+                    _board[i, j] = 0;
                 }
             }
         }
@@ -40,19 +43,19 @@ namespace eight_queens
 
             for (i = 0; i < col; i++)
             {
-                if (board[row, i] == 1) 
+                if (_board[row, i] == 1) 
                     return false;
             }
 
             for (i = row, j = col; i >= 0 && j >= 0; i--, j--)
             {
-                if (board[i, j] == 1)
+                if (_board[i, j] == 1)
                     return false;
             }
 
             for (i = row, j = col; j >= 0 && i < _numQueens; i++, j--)
             {
-                if (board[i, j] == 1)
+                if (_board[i, j] == 1)
                     return false;
             }
 
@@ -66,11 +69,11 @@ namespace eight_queens
         // вивід дошки
         public void PrintBoard()
         {
-            for (int i = 0; i < board.GetLength(0); i++)
+            for (int i = 0; i < _board.GetLength(0); i++)
             {
-                for (int j = 0; j < board.GetLength(1); j++)
+                for (int j = 0; j < _board.GetLength(1); j++)
                 {
-                    Console.WriteLine(" " + board[i, j] + " ");
+                    Console.WriteLine(" " + _board[i, j] + " ");
                 }
                 Console.WriteLine();
             }
