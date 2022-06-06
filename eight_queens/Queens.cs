@@ -11,6 +11,7 @@ namespace eight_queens
         private readonly int _numQueens = 8; // кількість ферзів
         private int[,] _board = new int[8, 8]; // шахова дошка
         public int VertexNum { get; set; } // номер вершини
+        public List<Queens> Successors { get; set; }
 
         // конструктор
         public Queens(int[,] board, int vertexNum)

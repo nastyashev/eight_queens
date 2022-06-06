@@ -8,7 +8,7 @@ namespace eight_queens
 {
     public static class Algorithms
     {
-        public class Graph
+        /*public class Graph
         {           
             private List<int>[] adj;
             public int VerticesNum { get; set; }
@@ -25,12 +25,7 @@ namespace eight_queens
             {
                 adj[vert].Add(newVert);
             }
-        }
-
-        private static void LDFSUtil()
-        {
-
-        }
+        }*/
 
         public static void LDFS()
         {
