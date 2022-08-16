@@ -8,15 +8,16 @@ namespace eight_queens
 {
     internal class ConditionsTree
     {
+        
         // список станів дошки
         //public List<Queens> Conditions { get; set; }
-        public Queens Root { get; set; }
+        public ChessBoard Root { get; set; }
         
         // конструктор
         /*public ConditionsTree()
         {
             Conditions = new List<Queens>();
-        }*/
+        }//
 
         // додавання нового стану
         public Queens AddCondition(int[,] board, Queens node, int vertexNum = 0)
@@ -25,7 +26,7 @@ namespace eight_queens
                 return new Queens(board, vertexNum);
             else
             {
-                //if(/*якась перевірка*/)
+                //if(/*якась перевірка//)
                 //{
                     for(int i = 0; i < node.Successors.Count; i++)
                     {
@@ -34,7 +35,7 @@ namespace eight_queens
                 //}
             }
             return node;
-        }
+        }*/
 
 
     }

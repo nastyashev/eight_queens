@@ -6,57 +6,63 @@ using System.Threading.Tasks;
 
 namespace eight_queens
 {
-    class Queens
+    class ChessBoard
     {
-        private readonly int _numQueens = 8; // кількість ферзів
-        private int[,] _board = new int[8, 8]; // шахова дошка
+        private const int _size = 8; // кількість ферзів
+        public BoardCell[,] Grid { get; set; }// шахова дошка
         public int VertexNum { get; set; } // номер вершини
-        public List<Queens> Successors { get; set; }
+        public List<ChessBoard> Successors { get; set; } // дошки-нащадки
 
         // конструктор
-        public Queens(int[,] board, int vertexNum)
+        public ChessBoard()
         {
-            this._board = board;
-            VertexNum = vertexNum;
+            Grid = new BoardCell[_size, _size];
+
+            for (int i = 0; i < _size; i++)
+            {
+                for (int j = 0; j < _size; j++)
+                {
+                    Grid[i, j] = new BoardCell(i, j);
+                }
+            }
         }
 
-        public int GetNumQueens() { return _numQueens; }
+        public int Size { get => _size; }
 
-        public int[,] GetBoard() { return _board; }
 
 
         // заповнення дошки нулями
         public void FillBoard()
         {
-            for (int i = 0; i < _board.GetLength(0); i++)
+            for (int i = 0; i < Grid.GetLength(0); i++)
             {
-                for (int j = 0; j < _board.GetLength(1); j++)
+                for (int j = 0; j < Grid.GetLength(1); j++)
                 {
-                    _board[i, j] = 0;
+                    Grid[i, j] = null;
                 }
             }
         }
         
-        // перевіряє чи атакований ферзь
+        // перевіряє чи можна розмістити ферзь
         public bool IsSafe(int row, int col)
         {
             int i, j;
 
             for (i = 0; i < col; i++)
             {
-                if (_board[row, i] == 1) 
+                if (Grid[row, i].IsOccupied) 
                     return false;
             }
 
             for (i = row, j = col; i >= 0 && j >= 0; i--, j--)
             {
-                if (_board[i, j] == 1)
+                if (Grid[i, j].IsOccupied)
                     return false;
             }
 
-            for (i = row, j = col; j >= 0 && i < _numQueens; i++, j--)
+            for (i = row, j = col; j >= 0 && i < _size; i++, j--)
             {
-                if (_board[i, j] == 1)
+                if (Grid[i, j].IsOccupied)
                     return false;
             }
 
@@ -67,7 +73,7 @@ namespace eight_queens
 
         
         
-        // вивід дошки
+        /* вивід дошки
         public void PrintBoard()
         {
             for (int i = 0; i < _board.GetLength(0); i++)
@@ -78,7 +84,7 @@ namespace eight_queens
                 }
                 Console.WriteLine();
             }
-        }
+        }*/
 
 
 
