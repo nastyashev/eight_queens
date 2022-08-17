@@ -30,46 +30,79 @@ namespace eight_queens
         public int Size { get => _size; }
 
 
-
-        // заповнення дошки нулями
-        public void FillBoard()
-        {
-            for (int i = 0; i < Grid.GetLength(0); i++)
-            {
-                for (int j = 0; j < Grid.GetLength(1); j++)
-                {
-                    Grid[i, j] = null;
-                }
-            }
-        }
         
         // перевіряє чи можна розмістити ферзь
         public bool IsSafe(int row, int col)
         {
-            int i, j;
+            if (!IsQueenRowCol(row, col))
+                if (!IsQueenDiagonal(row, col))
+                    return true;
+            return false;
+        }
 
-            for (i = 0; i < col; i++)
+        public bool IsSolvable()
+        {
+            int numQueens = 0;
+
+            for (int i = 0; i < _size; i++)
             {
-                if (Grid[row, i].IsOccupied) 
-                    return false;
+                for (int j = 0; j < _size; j++)
+                {
+                    if (Grid[i, j].IsOccupied)
+                    {
+                        numQueens++;
+                        if (IsQueenRowCol(i, j))
+                            return false;
+                    }
+                }
             }
+            if (numQueens == _size)
+                return true;
+            else return false;
+        }
+        
+        private bool IsQueenRowCol(int row, int col)
+        {
+            for (int i = 1; i < _size; i++)
+            {
+                if (Grid[(row + i) % _size, col].IsOccupied)
+                    return true;
+                if (Grid[col, (row + i) % _size].IsOccupied)
+                    return true;
+            }
+            return false;
+        }
+
+        private bool IsQueenDiagonal(int row, int col)
+        {
+            int i, j;
 
             for (i = row, j = col; i >= 0 && j >= 0; i--, j--)
             {
                 if (Grid[i, j].IsOccupied)
-                    return false;
+                    return true;
             }
 
-            for (i = row, j = col; j >= 0 && i < _size; i++, j--)
+            for (i = row, j = col; i < _size && j < _size; i++, j++)
             {
                 if (Grid[i, j].IsOccupied)
-                    return false;
+                    return true;
             }
 
-            return true;
+            for (i = row, j = col; i < _size && j >= 0; i++, j--)
+            {
+                if (Grid[i, j].IsOccupied)
+                    return true;
+            }
+
+            for (i = row, j = col; i >=0 && j < _size; i++, j--)
+            {
+                if (Grid[i, j].IsOccupied)
+                    return true;
+            }
+
+            return false;
         }
-
-
 
         
         

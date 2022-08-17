@@ -21,43 +21,7 @@ namespace eight_queens
             ShowBtnGrid();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            /*const int tileSize = 50;
-            const int gridSize = 8;
-            var clr1 = Color.DarkGray;
-            var clr2 = Color.White;
-
-            // initialize the "chess board"
-            _chessBoardPanels = new Panel[gridSize, gridSize];
-
-            // double for loop to handle all rows and columns
-            for (var n = 0; n < gridSize; n++)
-            {
-                for (var m = 0; m < gridSize; m++)
-                {
-                    // create new Panel control which will be one 
-                    // chess board tile
-                    var newPanel = new Panel
-                    {
-                        Size = new Size(tileSize, tileSize),
-                        Location = new Point(tileSize * n, tileSize * m)
-                    };
-
-                    // add to Form's Controls so that they show up
-                    Controls.Add(newPanel);
-
-                    // add to our 2d array of panels for future use
-                    _chessBoardPanels[n, m] = newPanel;
-
-                    // color the backgrounds
-                    if (n % 2 == 0)
-                        newPanel.BackColor = m % 2 != 0 ? clr1 : clr2;
-                    else
-                        newPanel.BackColor = m % 2 != 0 ? clr2 : clr1;
-                }
-            }*/
-        }
+        
 
         private static ChessBoard _chessBoard = new ChessBoard();
         
@@ -128,26 +92,33 @@ namespace eight_queens
 
         private void solveBtn_Click(object sender, EventArgs e)
         {
-            if (comboBoxAlgorithms.SelectedItem == null)
-                MessageBox.Show("Виберіть алгоритм!");
+            if (_chessBoard.IsSolvable())
+            {
+                if (comboBoxAlgorithms.SelectedItem == null)
+                    MessageBox.Show("Виберіть алгоритм!");
 
-            if (comboBoxAlgorithms.SelectedIndex == 0)
-                MessageBox.Show("LDFS");
-            if (comboBoxAlgorithms.SelectedIndex == 1)
-                MessageBox.Show("BFS");
-            if (comboBoxAlgorithms.SelectedIndex == 2)
-                MessageBox.Show("IDS");
+                if (comboBoxAlgorithms.SelectedIndex == 0)
+                    MessageBox.Show("LDFS");
 
+                if (comboBoxAlgorithms.SelectedIndex == 1)
+                    MessageBox.Show("BFS");
+
+                if (comboBoxAlgorithms.SelectedIndex == 2)
+                    MessageBox.Show("IDS");
+            }
+            
+            else
+                MessageBox.Show("can`t solve");
         }
 
         private void saveResultBtn_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("saved");
         }
 
         private void statsData_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("statistic");
         }
 
         
