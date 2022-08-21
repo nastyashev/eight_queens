@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eight_queens
 {
-    public static class Algorithms
+    internal static class Algorithms
     {
         /*public class Graph
         {           
@@ -27,15 +27,49 @@ namespace eight_queens
             }
         }*/
 
-        public static void LDFS()
+        public static void LDFS(TreeNode tree, ChessBoard node, ChessBoard parent)
         {
+            bool flag = true;
 
+            for (int i = 0; i < tree.children.Count; i++)
+            {
+                ChessBoard current = tree.children[i];
+
+                if(current != parent)
+                {
+                    flag = false;
+                    LDFS(tree, current, node);
+                }
+            }
+
+            if (flag)
+            {
+                if (ChessBoard.IsResult(node))
+                {
+                    
+                }
+            }
         }
         
-        
-        public static void BFS()
+        public static void BFS(TreeNode tree)
         {
-            
+            Queue<TreeNode> queue = new Queue<TreeNode>();
+            queue.Enqueue(tree);
+            while (queue.Count > 0)
+            {
+                tree = queue.Dequeue();
+
+                if (ChessBoard.IsResult(tree))
+                {
+                    
+                }
+
+                for (int i = 0; i < tree.children.Count; i++)
+                {
+                    if(tree.children[i] != null)
+                        queue.Enqueue(tree.children[i]);                    
+                }
+            }
 
 
         }

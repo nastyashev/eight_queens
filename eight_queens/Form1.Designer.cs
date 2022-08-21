@@ -86,10 +86,10 @@
             this.saveResultBtn.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.saveResultBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.saveResultBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveResultBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveResultBtn.Location = new System.Drawing.Point(775, 563);
+            this.saveResultBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveResultBtn.Location = new System.Drawing.Point(775, 562);
             this.saveResultBtn.Name = "saveResultBtn";
-            this.saveResultBtn.Size = new System.Drawing.Size(173, 55);
+            this.saveResultBtn.Size = new System.Drawing.Size(173, 64);
             this.saveResultBtn.TabIndex = 3;
             this.saveResultBtn.Text = "Записати результат у файл";
             this.saveResultBtn.UseVisualStyleBackColor = false;
