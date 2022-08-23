@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace eight_queens
 {
+    //клас для шахової дошки
     internal class ChessBoard
     {
-        private const int _size = 8; // кількість ферзів
-        public BoardCell[,] Grid { get; set; }// шахова дошка
+        //кількість ферзів
+        private const int _size = 8;
+        // шахова дошка
+        public BoardCell[,] Grid { get; set; }
 
         // конструктор за замовчуванням
         public ChessBoard()
@@ -181,8 +184,6 @@ namespace eight_queens
 
             return false;
         }
-
-        
         
         //кількість ферзів, що погрожують один одному
         public int NumOfTreats()
@@ -236,24 +237,6 @@ namespace eight_queens
             }
 
             return resList;
-        }
-
-        public override string ToString()
-        {
-            string str = "";
-            for (int i = 0; i < Grid.GetLength(0); i++)
-            {
-                for (int j = 0; j < Grid.GetLength(1); j++)
-                {
-                    if (Grid[j, i].IsOccupied)
-                        str += "1  ";
-                    else
-                        str += "0  ";
-                }
-                str += "\n";
-            }
-            
-            return str;
         }
     }
 }

@@ -22,6 +22,7 @@ namespace eight_queens
 
         //булева шахова дошка
         private static ChessBoard _chessBoard = new ChessBoard();
+        //змінна для збереження результату
         private AlgorithmStatistics _result;
 
         //масив кнопок для відображення дошки
@@ -91,6 +92,7 @@ namespace eight_queens
             }
         }
 
+        //відображення результату на дошці
         private void ShowSolution(ChessBoard board)
         {
             Image queenImg = Image.FromFile("C:\\Users\\nasty\\source\\repos\\eight_queens\\eight_queens\\queen-chess.png");
@@ -115,43 +117,47 @@ namespace eight_queens
         //кнопка для розв'язання задачі
         private void solveBtn_Click(object sender, EventArgs e)
         {
-            if (_chessBoard.IsSolvable())
+            try
             {
-                if (comboBoxAlgorithms.SelectedItem == null)
-                    MessageBox.Show("Виберіть алгоритм!");
-
-                if (comboBoxAlgorithms.SelectedIndex == 0)
+                if (_chessBoard.IsSolvable())
                 {
-                    _result = Algorithms.LDFS(_chessBoard);
-                    ShowSolution(_result.ChessBoard);
-                    if (_result.NumberOfCheckedVertices == 1)
-                        MessageBox.Show("Дана розстановка є розв'язком.");
-                }
-                    
+                    if (comboBoxAlgorithms.SelectedItem == null)
+                        MessageBox.Show("Виберіть алгоритм!");
 
-                if (comboBoxAlgorithms.SelectedIndex == 1)
-                {
-                    _result = Algorithms.BFS(_chessBoard);
-                    ShowSolution(_result.ChessBoard);
-                    MessageBox.Show(_result.ChessBoard.ToString());
-                    if (_result.NumberOfCheckedVertices == 1)
-                        MessageBox.Show("Дана розстановка є розв'язком.\n" + _result.ChessBoard.ToString());
-                }
+                    if (comboBoxAlgorithms.SelectedIndex == 0)
+                    {
+                        _result = Algorithms.LDFS(_chessBoard);
+                        ShowSolution(_result.ChessBoard);
+                        if (_result.NumberOfCheckedVertices == 1)
+                            MessageBox.Show("Дана розстановка є розв'язком.");
+                    }
 
+                    if (comboBoxAlgorithms.SelectedIndex == 1)
+                    {
+                        _result = Algorithms.BFS(_chessBoard);
+                        ShowSolution(_result.ChessBoard);
+                        MessageBox.Show(_result.ChessBoard.ToString());
+                        if (_result.NumberOfCheckedVertices == 1)
+                            MessageBox.Show("Дана розстановка є розв'язком.");
+                    }
 
-                if (comboBoxAlgorithms.SelectedIndex == 2)
-                {
-                    _result = Algorithms.IDS(_chessBoard);
-                    ShowSolution(_result.ChessBoard);
-                    MessageBox.Show(_result.ChessBoard.ToString());
-                    if (_result.NumberOfCheckedVertices == 1)
-                        MessageBox.Show("Дана розстановка є розв'язком.\n"+ _result.ChessBoard.ToString());
+                    if (comboBoxAlgorithms.SelectedIndex == 2)
+                    {
+                        _result = Algorithms.IDS(_chessBoard);
+                        ShowSolution(_result.ChessBoard);
+                        MessageBox.Show(_result.ChessBoard.ToString());
+                        if (_result.NumberOfCheckedVertices == 1)
+                            MessageBox.Show("Дана розстановка є розв'язком.");
+                    }
+
                 }
-                    
-              
-            }            
-            else
-                MessageBox.Show("Некоректна розстановка. Ферзів має бути 8. В кожному рядку та стовпці по 1 ферзі.");
+                else
+                    MessageBox.Show("Некоректна розстановка. Ферзів має бути 8. В кожному рядку та стовпці по 1 ферзі.");
+            }
+            catch(Exception exc)
+            {
+                MessageBox.Show("Exeption: " + exc.Message);
+            }
         }
 
         //кнопка для збереження результату у файл

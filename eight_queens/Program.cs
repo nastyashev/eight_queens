@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 namespace eight_queens
 {
+    //основна програма
     internal class Program
     {
         [STAThread]

@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 
 namespace eight_queens
 {
+    //клас для клітини на дошці
     internal class BoardCell
     {
-        public int RowNumber { get; set; } // номер по ряду
-        public int ColumnNumber { get; set; } // номер по стовпцю
-        public bool IsOccupied { get; set; } // чи є ферзь в цій клвтинці
-
-        public BoardCell(int x, int y) // конструктор
+        //номер по рядку
+        public int RowNumber { get; set; }
+        //номер по стовпцю
+        public int ColumnNumber { get; set; }
+        //чи є ферзь в цій клвтинці
+        public bool IsOccupied { get; set; }
+        //конструктор
+        public BoardCell(int x, int y)
         {
             RowNumber = x;
             ColumnNumber = y;

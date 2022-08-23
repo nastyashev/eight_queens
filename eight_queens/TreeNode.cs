@@ -6,13 +6,19 @@ using System.Threading.Tasks;
 
 namespace eight_queens
 {
+    //клас для вершини дерева
     internal class TreeNode
     {
+        //масив нащадків
         private TreeNode[] successors;
+        //шахова дошка
         private ChessBoard board;
+        //кількість нащадків
         private int successorsNum;
 
+        //конструктор за замовчуванням
         public TreeNode() { }
+        //конструктор з параметрами
         public TreeNode(ChessBoard board, int successorsNum)
         {
             this.board = board;
@@ -24,14 +30,10 @@ namespace eight_queens
             this.successorsNum = successorsNum;
         }
 
+        //геттер для дошки
         public ChessBoard Board { get { return board; } }
-        public int ChildCount { get { return successorsNum; } }
 
-        public TreeNode GetBoard(int index)
-        {
-            return successors[index];
-        }
-
+        //додавання дошки до дерева
         public TreeNode Add(ChessBoard board, int position)
         {
             successors[position] = new TreeNode(board, successorsNum);

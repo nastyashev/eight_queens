@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace eight_queens
 {
+    //клас для відображення результату роботи алгоритму    
     internal class AlgorithmStatistics
     {
+        //конструктор з параметрами
         public AlgorithmStatistics(int numberOfCheckedVertices, double operationTime, ChessBoard chessBoard)
         {
             NumberOfCheckedVertices = numberOfCheckedVertices;
@@ -15,14 +17,18 @@ namespace eight_queens
             ChessBoard = chessBoard;
         }
 
+        //шахова дошка
         public ChessBoard ChessBoard { get; set; }
+        //кількість перевірених вершин
         public int NumberOfCheckedVertices { get; set; }
+        //час витрачений на роботу алгоритму (в мілісекундах)
         public double OperationTime { get; set; }
     }
     
+    //клас з основними алгоритмами
     internal static class Algorithms
     {
-
+        //метод LDFS
         public static AlgorithmStatistics LDFS(ChessBoard board)//not work
         {
             DateTime time1 = DateTime.Now;
@@ -64,7 +70,8 @@ namespace eight_queens
             ChessBoard chessBoard = new ChessBoard(tmp2.Board);
             return new AlgorithmStatistics(counter, operTime, chessBoard);
         }
-        
+
+        //метод BFS
         public static AlgorithmStatistics BFS(ChessBoard board)//not work
         {
             DateTime time1 = DateTime.Now;
@@ -112,6 +119,7 @@ namespace eight_queens
             return new AlgorithmStatistics(counter, operTime, chessBoard);
         }
 
+        //метод IDS
         public static AlgorithmStatistics IDS(ChessBoard board/*, int maxDepth*/)//not work
         {
             DateTime time1 = DateTime.Now;
@@ -145,41 +153,9 @@ namespace eight_queens
                 maxDepth++;
             }
             return result;
-
-            /*int counter = 0;
-            int lastCount = 0;
-            int preLastCount = 0;
-            int childrenNum = (board.Size * board.Size) - board.Size;
-            TreeNode head = new TreeNode(new ChessBoard(board), childrenNum);
-            TreeNode tmp = new TreeNode();
-            AlgorithmStatistics result = null;
-            for (int i = 0; i <= maxDepth && result == null; i++)
-            {
-                tmp = DLS(head, i);
-                if(tmp != null)
-                {
-                    ChessBoard chessBoard = new ChessBoard(tmp.Board);
-                    for (int j = 0; j < head.ChildCount; j++)
-                    {
-                        lastCount++;
-                        
-                    }
-                    counter += lastCount++;
-                    double operTime = GetOperationTime(time1);
-                    result = new AlgorithmStatistics(counter, operTime, chessBoard);
-                }
-                else
-                {
-                    for (int j = 0; j < head.ChildCount; j++)
-                    {
-                        preLastCount++;
-                    }
-                    counter += preLastCount++;
-                }
-            }
-            return result;*/
         }
 
+        //допоміжний метод для DLS
         private static TreeNode DLS(TreeNode node, int depth)
         {
             if (node.Board.IsResult())
@@ -198,21 +174,9 @@ namespace eight_queens
                 }
             }
             return null;
-
-            /*TreeNode tmp = new TreeNode();
-            TreeNode tmp2 = new TreeNode();
-            List<ChessBoard> chessBoards = node.Board.MakeSuccessorsList();
-
-            for (int i = 0; i < chessBoards.Count; i++)
-            {
-                tmp = node.Add(chessBoards[i], i);
-                tmp2 = DLS(tmp, depth - 1);
-                if (tmp2 != null) return tmp2;
-            }
-
-            return null;*/
         }
 
+        //визнячення часу роботи алгоритму
         private static double GetOperationTime(DateTime time)
         {
             DateTime time2 = DateTime.Now;
