@@ -125,7 +125,7 @@ namespace eight_queens
                     _result = Algorithms.LDFS(_chessBoard);
                     ShowSolution(_result.ChessBoard);
                     if (_result.NumberOfCheckedVertices == 1)
-                        MessageBox.Show("already solved");
+                        MessageBox.Show("Дана розстановка є розв'язком.");
                 }
                     
 
@@ -133,8 +133,9 @@ namespace eight_queens
                 {
                     _result = Algorithms.BFS(_chessBoard);
                     ShowSolution(_result.ChessBoard);
+                    MessageBox.Show(_result.ChessBoard.ToString());
                     if (_result.NumberOfCheckedVertices == 1)
-                        MessageBox.Show("already solved");
+                        MessageBox.Show("Дана розстановка є розв'язком.\n" + _result.ChessBoard.ToString());
                 }
 
 
@@ -142,14 +143,15 @@ namespace eight_queens
                 {
                     _result = Algorithms.IDS(_chessBoard);
                     ShowSolution(_result.ChessBoard);
+                    MessageBox.Show(_result.ChessBoard.ToString());
                     if (_result.NumberOfCheckedVertices == 1)
-                        MessageBox.Show("already solved");
+                        MessageBox.Show("Дана розстановка є розв'язком.\n"+ _result.ChessBoard.ToString());
                 }
                     
               
             }            
             else
-                MessageBox.Show("can`t solve");
+                MessageBox.Show("Некоректна розстановка. Ферзів має бути 8. В кожному рядку та стовпці по 1 ферзі.");
         }
 
         //кнопка для збереження результату у файл
@@ -179,14 +181,14 @@ namespace eight_queens
                         file.WriteLine();
                     }
                     
-                    string numStr = "number of checked vertices: " + _result.NumberOfCheckedVertices.ToString();
-                    string timeStr = "operation time: " + _result.OperationTime.ToString() + " ms.";
+                    string numStr = "Кількість відвіданих вершин: " + _result.NumberOfCheckedVertices.ToString();
+                    string timeStr = "Час роботи алгоритму: " + _result.OperationTime.ToString() + " мс";
                     file.WriteLine(numStr + "\n" + timeStr);
 
                     file.Close();
                 }
 
-                MessageBox.Show("File successfully saved.");
+                MessageBox.Show("Файл успішно збережено.");
             }
             catch(Exception exc)
             {
@@ -197,8 +199,8 @@ namespace eight_queens
         //кнопка для відображення статистичних даних роботи алгоритму
         private void statsData_Click(object sender, EventArgs e)
         {
-            string numStr = "number of checked vertices: " + _result.NumberOfCheckedVertices.ToString();
-            string timeStr = "operation time: " + _result.OperationTime.ToString() + " ms.";
+            string numStr = "Кількість відвіданих вершин: " + _result.NumberOfCheckedVertices.ToString();
+            string timeStr = "Час роботи алгоритму: " + _result.OperationTime.ToString() + " мс";
             MessageBox.Show(numStr + "\n" + timeStr);
         }  
     }

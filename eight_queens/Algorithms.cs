@@ -38,7 +38,6 @@ namespace eight_queens
             TreeNode root = new TreeNode(new ChessBoard(board), childrenNum);
             Stack<TreeNode> stack = new Stack<TreeNode>();
             stack.Push(root);
-
             List<ChessBoard> chessBoards = new List<ChessBoard>();
             TreeNode tmp = new TreeNode();
             TreeNode tmp2 = new TreeNode();
@@ -49,7 +48,7 @@ namespace eight_queens
             while (flag)
             {
                 counter++;
-                tmp = stack.Pop();
+                tmp = stack.Peek();
                 chessBoards = tmp.Board.MakeSuccessorsList();
                 Random rand = new Random();
                 number = rand.Next(chessBoards.Count);
@@ -58,6 +57,7 @@ namespace eight_queens
                 if (tmp2.Board.IsResult())
                 {
                     flag = false;
+                    break;
                 }
             }
             double operTime = GetOperationTime(time1);
@@ -84,6 +84,7 @@ namespace eight_queens
             bool flag = true;
             TreeNode tmp2 = tmp;
             List<ChessBoard> chessBoards = new List<ChessBoard>();
+            ChessBoard chessBoard = null;
 
             while (flag)
             {
@@ -98,6 +99,7 @@ namespace eight_queens
                     if (tmp2.Board.IsResult())
                     {
                         flag = false;
+                        chessBoard = new ChessBoard(tmp2.Board);
                     }
                     counter++;
                 }
@@ -106,8 +108,7 @@ namespace eight_queens
             while(queue.Count > 0)
                 queue.Dequeue();
 
-            double operTime = GetOperationTime(time1);
-            ChessBoard chessBoard = new ChessBoard(tmp2.Board);
+            double operTime = GetOperationTime(time1);            
             return new AlgorithmStatistics(counter, operTime, chessBoard);
         }
 

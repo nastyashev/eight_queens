@@ -40,7 +40,8 @@ namespace eight_queens
             }
         }
 
-        public ChessBoard(ChessBoard previousBoard, int position1, int position2 = -1, int orientation = 1)
+        //конструктор для створення списку нащадків
+        public ChessBoard(ChessBoard previousBoard, int position1, int position2 = -1, int orientation = 0)
         {
             Grid = new BoardCell[_size, _size];
             for (int i = 0; i < _size; i++)
@@ -59,7 +60,7 @@ namespace eight_queens
                 position2 %= _size;
             BoardCell tmp;
 
-            if(orientation == 1)
+            if(orientation == 0)
             {
                 for (int i = 0; i < _size; i++)
                 {
@@ -68,7 +69,7 @@ namespace eight_queens
                     Grid[i, position2] = tmp;
                 }
             }
-            if(orientation == 2)
+            if(orientation == 1)
             {
                 for (int i = 0; i < _size; i++)
                 {
@@ -81,29 +82,20 @@ namespace eight_queens
 
         //розмір дошки
         public int Size { get => _size; }
-  
-        // перевіряє чи можна розмістити ферзь
-        public bool IsSafe(int row, int col)
-        {
-            if (!IsQueenRowCol(row, col))
-                if (!IsQueenDiagonal(row, col))
-                    return true;
-            return false;
-        }
 
         //перевіряє чи є дана розстановка відповіддю
         public bool IsResult()
         {
-            bool flag = false;
             for (int i = 0; i < _size; i++)
             {
                 for (int j = 0; j < _size; j++)
                 {
                     if (Grid[i, j].IsOccupied)
-                        flag = !IsQueenDiagonal(i, j);
+                        if (IsQueenDiagonal(i, j))
+                            return false;
                 }
             }
-            return flag;
+            return true;
         }
 
         //перевіряє дошку для подальшого вирішення задачі
@@ -210,6 +202,7 @@ namespace eight_queens
             return num;
         }
 
+        //створення масиву нащадків дошки
         public List<ChessBoard> MakeSuccessorsList()
         {
             int numOfTreats = _size;
@@ -218,7 +211,7 @@ namespace eight_queens
             ChessBoard[] tmpArr = new ChessBoard[maxSuccessorsNum];
             List<ChessBoard> resList = new List<ChessBoard>();
 
-            for (int orientation = 1; orientation <= 2; orientation++)
+            for (int orientation = 0; orientation <= 1; orientation++)
             {
                 for (int i = 0; i < _size - 1; i++)
                 {
@@ -252,10 +245,10 @@ namespace eight_queens
             {
                 for (int j = 0; j < Grid.GetLength(1); j++)
                 {
-                    if (Grid[i, j].IsOccupied)
-                        str += "1";
+                    if (Grid[j, i].IsOccupied)
+                        str += "1  ";
                     else
-                        str += "0";
+                        str += "0  ";
                 }
                 str += "\n";
             }
