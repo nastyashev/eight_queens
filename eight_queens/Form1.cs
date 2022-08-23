@@ -136,7 +136,6 @@ namespace eight_queens
                     {
                         _result = Algorithms.BFS(_chessBoard);
                         ShowSolution(_result.ChessBoard);
-                        MessageBox.Show(_result.ChessBoard.ToString());
                         if (_result.NumberOfCheckedVertices == 1)
                             MessageBox.Show("Дана розстановка є розв'язком.");
                     }
@@ -145,7 +144,6 @@ namespace eight_queens
                     {
                         _result = Algorithms.IDS(_chessBoard);
                         ShowSolution(_result.ChessBoard);
-                        MessageBox.Show(_result.ChessBoard.ToString());
                         if (_result.NumberOfCheckedVertices == 1)
                             MessageBox.Show("Дана розстановка є розв'язком.");
                     }

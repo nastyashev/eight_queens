@@ -63,7 +63,6 @@ namespace eight_queens
                 if (tmp2.Board.IsResult())
                 {
                     flag = false;
-                    break;
                 }
             }
             double operTime = GetOperationTime(time1);
@@ -99,14 +98,13 @@ namespace eight_queens
                 queue.Dequeue();
                 chessBoards = tmp.Board.MakeSuccessorsList();
 
-                for (int i = 0; i < chessBoards.Count && flag; i++)
+                for (int i = 0; i < chessBoards.Count; i++)
                 {
                     tmp2 = tmp.Add(chessBoards[i], i);
                     queue.Enqueue(tmp2);
                     if (tmp2.Board.IsResult())
                     {
                         flag = false;
-                        chessBoard = new ChessBoard(tmp2.Board);
                     }
                     counter++;
                 }
@@ -115,7 +113,8 @@ namespace eight_queens
             while(queue.Count > 0)
                 queue.Dequeue();
 
-            double operTime = GetOperationTime(time1);            
+            double operTime = GetOperationTime(time1);
+            chessBoard = new ChessBoard(tmp2.Board);
             return new AlgorithmStatistics(counter, operTime, chessBoard);
         }
 

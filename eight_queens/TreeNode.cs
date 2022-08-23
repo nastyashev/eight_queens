@@ -32,6 +32,8 @@ namespace eight_queens
 
         //геттер для дошки
         public ChessBoard Board { get { return board; } }
+        //геттер кількості нащадків
+        public int SuccessorsNum { get { return successorsNum; } }
 
         //додавання дошки до дерева
         public TreeNode Add(ChessBoard board, int position)
