@@ -10,8 +10,6 @@ namespace eight_queens
     {
         private const int _size = 8; // кількість ферзів
         public BoardCell[,] Grid { get; set; }// шахова дошка
-        //public int VertexNum { get; set; } // номер вершини
-        //public List<ChessBoard> Successors { get; set; } // дошки-нащадки
 
         // конструктор за замовчуванням
         public ChessBoard()
@@ -31,11 +29,52 @@ namespace eight_queens
         //конструктор копіювання
         public ChessBoard(ChessBoard previousBoard)
         {
+            Grid = new BoardCell[_size, _size];
             for (int i = 0; i < _size; i++)
             {
                 for (int j = 0; j < _size; j++)
                 {
+                    Grid[i, j] = new BoardCell(i, j);
                     Grid[i, j] = previousBoard.Grid[i, j];
+                }
+            }
+        }
+
+        public ChessBoard(ChessBoard previousBoard, int position1, int position2 = -1, int orientation = 1)
+        {
+            Grid = new BoardCell[_size, _size];
+            for (int i = 0; i < _size; i++)
+            {
+                for (int j = 0; j < _size; j++)
+                {
+                    Grid[i, j] = new BoardCell(i, j);
+                    Grid[i, j] = previousBoard.Grid[i, j];
+                }
+            }
+            position1 %= _size;
+
+            if (position2 == -1)
+                position2 = (position1 + 1) % _size;
+            else
+                position2 %= _size;
+            BoardCell tmp;
+
+            if(orientation == 1)
+            {
+                for (int i = 0; i < _size; i++)
+                {
+                    tmp = Grid[i, position1];
+                    Grid[i, position1] = Grid[i, position2];
+                    Grid[i, position2] = tmp;
+                }
+            }
+            if(orientation == 2)
+            {
+                for (int i = 0; i < _size; i++)
+                {
+                    tmp = Grid[position1, i];
+                    Grid[position1, i] = Grid[position2, i];
+                    Grid[position2, i] = tmp;
                 }
             }
         }
@@ -53,17 +92,18 @@ namespace eight_queens
         }
 
         //перевіряє чи є дана розстановка відповіддю
-        public static bool IsResult(ChessBoard board)
+        public bool IsResult()
         {
+            bool flag = false;
             for (int i = 0; i < _size; i++)
             {
                 for (int j = 0; j < _size; j++)
                 {
-                    if (board.IsSafe(i, j))
-                        return true;
+                    if (Grid[i, j].IsOccupied)
+                        flag = !IsQueenDiagonal(i, j);
                 }
             }
-            return false;
+            return flag;
         }
 
         //перевіряє дошку для подальшого вирішення задачі
@@ -170,7 +210,57 @@ namespace eight_queens
             return num;
         }
 
+        public List<ChessBoard> MakeSuccessorsList()
+        {
+            int numOfTreats = _size;
+            int maxSuccessorsNum = (_size * _size) - _size;
+            int position = 0;
+            ChessBoard[] tmpArr = new ChessBoard[maxSuccessorsNum];
+            List<ChessBoard> resList = new List<ChessBoard>();
 
+            for (int orientation = 1; orientation <= 2; orientation++)
+            {
+                for (int i = 0; i < _size - 1; i++)
+                {
+                    for (int j = i + 1; j < _size; j++)
+                    {
+                        tmpArr[position] = new ChessBoard(this, i, j, orientation);
+                        if (numOfTreats >= tmpArr[position].NumOfTreats())
+                        {
+                            numOfTreats = tmpArr[position].NumOfTreats();
+                        }
+                        position++;
+                    }
+                }
+            }
 
+            for (int i = 0; i < maxSuccessorsNum; i++)
+            {
+                if (tmpArr[i].NumOfTreats() == numOfTreats)
+                {
+                    resList.Add(tmpArr[i]);
+                }
+            }
+
+            return resList;
+        }
+
+        public override string ToString()
+        {
+            string str = "";
+            for (int i = 0; i < Grid.GetLength(0); i++)
+            {
+                for (int j = 0; j < Grid.GetLength(1); j++)
+                {
+                    if (Grid[i, j].IsOccupied)
+                        str += "1";
+                    else
+                        str += "0";
+                }
+                str += "\n";
+            }
+            
+            return str;
+        }
     }
 }

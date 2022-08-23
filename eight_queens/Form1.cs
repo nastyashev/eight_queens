@@ -22,8 +22,9 @@ namespace eight_queens
 
         //булева шахова дошка
         private static ChessBoard _chessBoard = new ChessBoard();
-        
-        //масив кнопок для відовраження дошки
+        private AlgorithmStatistics _result;
+
+        //масив кнопок для відображення дошки
         private Button[,] btnGrid = new Button[_chessBoard.Size, _chessBoard.Size];
 
         //відображення дошки
@@ -62,7 +63,6 @@ namespace eight_queens
                     }
                         
                     btnGrid[i, j].FlatStyle = FlatStyle.Flat;
-                    
                 }
             }
         }
@@ -91,6 +91,27 @@ namespace eight_queens
             }
         }
 
+        private void ShowSolution(ChessBoard board)
+        {
+            Image queenImg = Image.FromFile("C:\\Users\\nasty\\source\\repos\\eight_queens\\eight_queens\\queen-chess.png");
+
+            for (int i = 0; i < _chessBoard.Size; i++)
+            {
+                for (int j = 0; j < _chessBoard.Size; j++)
+                {
+                    if (board.Grid[i, j].IsOccupied)
+                    {
+                        btnGrid[i, j].BackgroundImage = queenImg;
+                        btnGrid[i, j].BackgroundImageLayout = ImageLayout.Zoom;
+                    }
+                    else
+                    {
+                        btnGrid[i, j].BackgroundImageLayout = ImageLayout.None;
+                    }
+                }
+            }
+        }
+
         //кнопка для розв'язання задачі
         private void solveBtn_Click(object sender, EventArgs e)
         {
@@ -100,15 +121,33 @@ namespace eight_queens
                     MessageBox.Show("Виберіть алгоритм!");
 
                 if (comboBoxAlgorithms.SelectedIndex == 0)
-                    MessageBox.Show("LDFS");
+                {
+                    _result = Algorithms.LDFS(_chessBoard);
+                    ShowSolution(_result.ChessBoard);
+                    if (_result.NumberOfCheckedVertices == 1)
+                        MessageBox.Show("already solved");
+                }
+                    
 
                 if (comboBoxAlgorithms.SelectedIndex == 1)
-                    MessageBox.Show("BFS");
+                {
+                    _result = Algorithms.BFS(_chessBoard);
+                    ShowSolution(_result.ChessBoard);
+                    if (_result.NumberOfCheckedVertices == 1)
+                        MessageBox.Show("already solved");
+                }
+
 
                 if (comboBoxAlgorithms.SelectedIndex == 2)
-                    MessageBox.Show("IDS");
-            }
-            
+                {
+                    _result = Algorithms.IDS(_chessBoard);
+                    ShowSolution(_result.ChessBoard);
+                    if (_result.NumberOfCheckedVertices == 1)
+                        MessageBox.Show("already solved");
+                }
+                    
+              
+            }            
             else
                 MessageBox.Show("can`t solve");
         }
@@ -132,13 +171,19 @@ namespace eight_queens
                     {
                         for (int j = 0; j < _chessBoard.Size; j++)
                         {
-                            if (!_chessBoard.Grid[j, i].IsOccupied)
+                            if (!_result.ChessBoard.Grid[j, i].IsOccupied)
                                 file.Write("0 ");
-                            if (_chessBoard.Grid[j, i].IsOccupied)
+                            if (_result.ChessBoard.Grid[j, i].IsOccupied)
                                 file.Write("1 ");
                         }
                         file.WriteLine();
                     }
+                    
+                    string numStr = "number of checked vertices: " + _result.NumberOfCheckedVertices.ToString();
+                    string timeStr = "operation time: " + _result.OperationTime.ToString() + " ms.";
+                    file.WriteLine(numStr + "\n" + timeStr);
+
+                    file.Close();
                 }
 
                 MessageBox.Show("File successfully saved.");
@@ -152,9 +197,9 @@ namespace eight_queens
         //кнопка для відображення статистичних даних роботи алгоритму
         private void statsData_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("statistic");
-        }
-
-        
+            string numStr = "number of checked vertices: " + _result.NumberOfCheckedVertices.ToString();
+            string timeStr = "operation time: " + _result.OperationTime.ToString() + " ms.";
+            MessageBox.Show(numStr + "\n" + timeStr);
+        }  
     }
 }

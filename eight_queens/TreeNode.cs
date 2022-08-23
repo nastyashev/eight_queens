@@ -8,61 +8,34 @@ namespace eight_queens
 {
     internal class TreeNode
     {
-        private List<ChessBoard> children;
+        private TreeNode[] successors;
         private ChessBoard board;
-        //private int childrenNum;
+        private int successorsNum;
 
-        public TreeNode(ChessBoard board)
+        public TreeNode() { }
+        public TreeNode(ChessBoard board, int successorsNum)
         {
             this.board = board;
-            children = new List<ChessBoard>();
-
-            for (int i = 0; i < board.Size; i++)
+            successors = new TreeNode[successorsNum];
+            for (int i = 0; i < successorsNum; i++)
             {
-                for (int j = i + 1; j < board.Size; j++)
-                {
-                    ChessBoard tmpBoard = this.board;
-                    for (int k = 0; k < board.Size; k++)
-                    {
-                        BoardCell tmpCell = tmpBoard.Grid[i, k];
-                        tmpBoard.Grid[i, k] = tmpBoard.Grid[j, k];
-                        tmpBoard.Grid[j, k] = tmpCell;
-                    }
-                    children.Add(tmpBoard);
-                }
+                successors[i] = null;
             }
+            this.successorsNum = successorsNum;
         }
 
         public ChessBoard Board { get { return board; } }
+        public int ChildCount { get { return successorsNum; } }
 
-        public ChessBoard GetBoard(int index)
+        public TreeNode GetBoard(int index)
         {
-            return children[index];
+            return successors[index];
         }
 
-        /*public List<ChessBoard> MakeSuccessorsList(ChessBoard board)
+        public TreeNode Add(ChessBoard board, int position)
         {
-            this.board = board;
-            children = new List<ChessBoard>();
-
-            for (int i = 0; i < board.Size; i++)
-            {
-                for (int j = i + 1; j < board.Size; j++)
-                {
-                    ChessBoard tmpBoard = this.board;
-                    for (int k = 0; k < board.Size; k++)
-                    {
-                        BoardCell tmpCell = tmpBoard.Grid[i, k];
-                        tmpBoard.Grid[i, k] = tmpBoard.Grid[j, k];
-                        tmpBoard.Grid[j, k] = tmpCell;
-                    }
-                    children.Add(tmpBoard);
-                }
-            }
-
-            return children;
-        }*/
-
-
+            successors[position] = new TreeNode(board, successorsNum);
+            return successors[position];
+        }
     }
 }
