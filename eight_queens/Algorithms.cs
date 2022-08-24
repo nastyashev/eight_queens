@@ -29,11 +29,11 @@ namespace eight_queens
     internal static class Algorithms
     {
         //метод LDFS
-        public static AlgorithmStatistics LDFS(ChessBoard board)//not work
+        public static AlgorithmStatistics LDFS(ChessBoard board)
         {
             DateTime time1 = DateTime.Now;
             
-            if (board.IsResult())//this part work
+            if (board.IsResult())
             {
                 double operTime1 = GetOperationTime(time1);
                 AlgorithmStatistics result1 = new AlgorithmStatistics(1, operTime1, board);
@@ -53,17 +53,17 @@ namespace eight_queens
 
             while (flag)
             {
-                counter++;
                 tmp = stack.Peek();
                 chessBoards = tmp.Board.MakeSuccessorsList();
                 Random rand = new Random();
                 number = rand.Next(chessBoards.Count);
                 tmp2 = tmp.Add(chessBoards[number], number);
-                stack.Push(tmp2);
+                stack.Push(tmp2);                
                 if (tmp2.Board.IsResult())
                 {
                     flag = false;
                 }
+                counter += childrenNum;
             }
             double operTime = GetOperationTime(time1);
             ChessBoard chessBoard = new ChessBoard(tmp2.Board);
@@ -71,11 +71,11 @@ namespace eight_queens
         }
 
         //метод BFS
-        public static AlgorithmStatistics BFS(ChessBoard board)//not work
+        public static AlgorithmStatistics BFS(ChessBoard board)
         {
             DateTime time1 = DateTime.Now;
 
-            if (board.IsResult())//this part work
+            if (board.IsResult())
             {
                 double operTime1 = GetOperationTime(time1);
                 AlgorithmStatistics result1 = new AlgorithmStatistics(1, operTime1, board);
@@ -119,11 +119,11 @@ namespace eight_queens
         }
 
         //метод IDS
-        public static AlgorithmStatistics IDS(ChessBoard board/*, int maxDepth*/)//not work
+        public static AlgorithmStatistics IDS(ChessBoard board)
         {
             DateTime time1 = DateTime.Now;
 
-            if (board.IsResult())//this part work
+            if (board.IsResult())
             {
                 double operTime1 = GetOperationTime(time1);
                 AlgorithmStatistics result1 = new AlgorithmStatistics(1, operTime1, board);
@@ -140,7 +140,7 @@ namespace eight_queens
             while (flag)
             {
                 tmp = DLS(root, maxDepth);
-                counter++;
+                counter += childrenNum;
                 if (tmp != null)
                 {
                     ChessBoard chessBoard = new ChessBoard(tmp.Board);
@@ -154,7 +154,7 @@ namespace eight_queens
             return result;
         }
 
-        //допоміжний метод для DLS
+        //допоміжний метод для IDS
         private static TreeNode DLS(TreeNode node, int depth)
         {
             if (node.Board.IsResult())
@@ -175,7 +175,7 @@ namespace eight_queens
             return null;
         }
 
-        //визнячення часу роботи алгоритму
+        //визначення часу роботи алгоритму
         private static double GetOperationTime(DateTime time)
         {
             DateTime time2 = DateTime.Now;

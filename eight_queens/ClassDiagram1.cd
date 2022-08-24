@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="eight_queens.AlgorithmStatistics">
+    <Position X="5" Y="1" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAAIAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Algorithms.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ChessBoard" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="eight_queens.Algorithms">
+    <Position X="2" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAgAAAAABAAAAAAAAAAAAAQAAAAAIAAAA=</HashCode>
+      <FileName>Algorithms.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="eight_queens.BoardCell">
+    <Position X="7.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAgAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BoardCell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="eight_queens.ChessBoard">
+    <Position X="4" Y="3.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAEAAAAgIAAAAAIAAAAAABAAAAABAAAgAIAAAA=</HashCode>
+      <FileName>ChessBoard.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Grid" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="eight_queens.Form1">
+    <Position X="9.25" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACICBAASAAABADAACACAAiAEICAAQAACAAAAAAAAA=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_chessBoard" />
+      <Field Name="_result" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="eight_queens.Program">
+    <Position X="11.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="eight_queens.TreeNode">
+    <Position X="1" Y="3.75" Width="2" />
+    <AssociationLine Name="successors" Type="eight_queens.TreeNode" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.375" Y="5.949" />
+        <Point X="1.375" Y="6.631" />
+        <Point X="2.562" Y="6.631" />
+        <Point X="2.562" Y="5.949" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAQAgAAEAAAAAAAAAAAAAAAIAAAACAAAAA=</HashCode>
+      <FileName>TreeNode.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="board" />
+      <Field Name="successors" />
+      <Property Name="Board" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
